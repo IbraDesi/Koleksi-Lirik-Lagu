@@ -15,11 +15,19 @@
             justify-content: center;
         }
         @media (prefers-color-scheme: dark) {
-    body {
-        background-color: #121212;
-        color: #e8eaed;
-    }
-}
+            body {
+                background-color: #121212;
+                color: #e8eaed;
+            }
+            .kotak-cari {
+                background-color: #202124 !important;
+                color: #e8eaed !important;
+                border: 1px solid #3c4043 !important;
+            }
+            .daftar-lagu li {
+                border-bottom: 1px solid #3c4043 !important;
+            }
+        }
         .container {
             max-width: 600px;
             width: 100%;
@@ -27,28 +35,46 @@
         h1 {
             font-size: 28px;
             color: #1a73e8;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
         p {
             color: #5f6368;
-            margin-bottom: 30px;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        /* DESAIN KOTAK PENCARIAN */
+        .kotak-cari {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 25px;
+            outline: none;
+            background-color: #ffffff;
+        }
+        .kotak-cari:focus {
+            border-color: #1a73e8;
         }
         .daftar-lagu {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
         .daftar-lagu li {
-            background: white;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            border-bottom: 1px solid #ededed;
+        }
+        .daftar-lagu li:last-child {
+            border-bottom: none;
         }
         .daftar-lagu a {
-            color: #1a0dab;
+            color: #1a73e8;
             text-decoration: none;
-            font-weight: bold;
             font-size: 18px;
+            font-weight: 500;
+            display: block;
         }
         .daftar-lagu a:hover {
             text-decoration: underline;
@@ -62,23 +88,46 @@
 </head>
 <body>
 
-    <div class="container">
-        <h1>Koleksi Lirik Lagu</h1>
-        <p>Jika ada saran lagu lain, langsung saja Follow & DM di Instagram ibra.desi ya. &#128521;</p>
-        
-        <ul class="daftar-lagu">
-            <!-- DAFTAR LAGU PERTAMA KAMU -->
-            <li>
-                <a href="lirik/lagu-pertama.html">Terbawa Bawa Dunia</a>
-                <div class="band">Oleh: S.K.O.K</div>
-            </li>
-            <!-- Besok-besok kalau ada lagu baru lagi, tinggal tambah di bawah sini -->
-            <li>
-    <a href="lirik/semua-takkan-abadi.html">Semua Takkan Abadi</a>
-    <div class="band">Oleh: Bonet Less</div>
-</li>
-        </ul>
-    </div>
+<div class="container">
+    <h1>Koleksi Lirik Lagu</h1>
+    <p>Jika ada saran lagu lain, langsung saja Follow & DM di Instagram ibra.desi ya. &#128521;</p>
+    
+    <!-- FITUR INPUT PENCARIAN -->
+    <input type="text" id="inputCari" class="kotak-cari" placeholder="Cari judul lagu atau nama band..." onkeyup="cariLirik()">
+
+    <ul class="daftar-lagu" id="listLagu">
+        <li>
+            <a href="lirik/lagu-pertama.html">Terbawa Bawa Dunia</a>
+            <div class="band">Oleh: S.K.O.K</div>
+        </li>
+        <li>
+            <a href="lirik/semua-takkan-abadi.html">Semua Takkan Abadi</a>
+            <div class="band">Oleh: Bonet Less</div>
+        </li>
+        <li>
+            <a href="lirik/terus-bersinar.html">Terus Bersinar</a>
+            <div class="band">Oleh: Superiots Feat. Shania</div>
+        </li>
+    </ul>
+</div>
+
+<!-- KODE JAVASCRIPT UNTUK FILTRASI OTOMATIS -->
+<script>
+function cariLirik() {
+    let input = document.getElementById('inputCari').value.toLowerCase();
+    let ul = document.getElementById('listLagu');
+    let li = ul.getElementsByTagName('li');
+
+    for (let i = 0; i < li.length; i++) {
+        let teksLagu = li[i].textContent || li[i].innerText;
+        if (teksLagu.toLowerCase().indexOf(input) > -1) {
+            li[i].style.display = ""; // Tampilkan jika cocok
+        } else {
+            li[i].style.display = "none"; // Sembunyikan jika tidak cocok
+        }
+    }
+}
+</script>
 
 </body>
 </html>
