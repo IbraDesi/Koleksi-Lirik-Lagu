@@ -42,7 +42,6 @@
             font-size: 14px;
             margin-bottom: 25px;
         }
-        /* DESAIN KOTAK PENCARIAN */
         .kotak-cari {
             width: 100%;
             padding: 12px 15px;
@@ -90,9 +89,8 @@
 
 <div class="container">
     <h1>Koleksi Lirik Lagu</h1>
-    <p>Jika ada saran lagu lain, langsung saja Follow & DM di Instagram @ibra.desi ya.&#128521;</p>
+    <p>Jika ada saran lagu lain, langsung saja Follow & DM di Instagram ibra.desi ya. &#128521;</p>
     
-    <!-- FITUR INPUT PENCARIAN -->
     <input type="text" id="inputCari" class="kotak-cari" placeholder="Cari judul lagu atau nama band..." onkeyup="cariLirik()">
 
     <ul class="daftar-lagu" id="listLagu">
@@ -106,16 +104,15 @@
         </li>
         <li>
             <a href="lirik/terus-bersinar.html">Terus Bersinar</a>
-            <div class="band">Oleh: Superiots Feat.Shania</div>
+            <div class="band">Oleh: Superiots Feat. Shania</div>
         </li>
         <li>
-    <a href="lirik/bagaimana-jika-kristen-yang-masuk-surga.html">Bagaimana Jika Kristen Yang Masuk Surga?</a>
-    <div class="band">Oleh: Aldy Amis</div>
-</li>
+            <a href="lirik/bagaimana-jika-kristen-yang-masuk-surga.html">Bagaimana Jika Kristen Yang Masuk Surga?</a>
+            <div class="band">Oleh: Aldy Amis</div>
+        </li>
     </ul>
 </div>
 
-<!-- KODE JAVASCRIPT UNTUK FILTRASI OTOMATIS -->
 <script>
 function cariLirik() {
     let input = document.getElementById('inputCari').value.toLowerCase();
@@ -125,9 +122,9 @@ function cariLirik() {
     for (let i = 0; i < li.length; i++) {
         let teksLagu = li[i].textContent || li[i].innerText;
         if (teksLagu.toLowerCase().indexOf(input) > -1) {
-            li[i].style.display = ""; // Tampilkan jika cocok
+            li[i].style.display = "";
         } else {
-            li[i].style.display = "none"; // Sembunyikan jika tidak cocok
+            li[i].style.display = "none";
         }
     }
 }
