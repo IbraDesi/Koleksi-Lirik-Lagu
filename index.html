@@ -12,7 +12,8 @@
             margin: 0;
             padding: 40px 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
         @media (prefers-color-scheme: dark) {
             body {
@@ -83,13 +84,24 @@
             font-size: 14px;
             margin-top: 5px;
         }
+        .footer-catatan {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            margin-top: 60px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #70757a;
+            line-height: 1.4;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Koleksi Lirik Lagu</h1>
-    <p>Punya rekomendasi lagu lain? Langsung saja follow & DM di akun Instagram @ibra.desi ya!&#128521;</p>
+    <p>Punya rekomendasi lagu lain? Langsung saja follow & DM di akun Instagram @ibra.desi ya! &#128521;</p>
     
     <input type="text" id="inputCari" class="kotak-cari" placeholder="Cari judul lagu atau nama band..." onkeyup="cariLirik()">
 
@@ -112,7 +124,9 @@
         </li>
     </ul>
 </div>
-    <div style="text-align: center; margin-top: 50px; margin-bottom: 20px; font-size: 12px; color: #70757a; line-height: 1.4; padding: 0 20px;">
+
+<!-- POSISI CATATAN SEKARANG SUDAH AMAN DI LUAR KONTAINER -->
+<div class="footer-catatan">
     Catatan: Hak cipta sepenuhnya milik musisi terkait. Mohon maaf jika ada salah ketik nama vokalis/band, silakan lapor via DM untuk perbaikan.
 </div>
 
