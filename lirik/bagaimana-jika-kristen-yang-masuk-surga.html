@@ -179,11 +179,14 @@
         Minum anggur bersama
     </div>
 </div>
-    <script>
+   <script>
     const audio = document.getElementById('audioLagu');
     const tombolPlay = document.getElementById('tombolPlay');
     const progressBar = document.getElementById('progressBar');
+    const progressContainer = document.querySelector('.progress-container');
     const durasiTeks = document.getElementById('durasiTeks');
+
+    let sedangGeser = false;
 
     function togglePlay() {
         if (audio.paused) {
@@ -195,16 +198,12 @@
         }
     }
 
+    // Update Otomatis Garis Progress & Waktu Lagu saat berputar biasa
     audio.addEventListener('timeupdate', () => {
-        const persen = (audio.currentTime / audio.duration) * 100;
-        progressBar.style.width = persen + '%';
-        
-        let menit = Math.floor(audio.currentTime / 60);
-        let detik = Math.floor(audio.currentTime % 60);
-        if (detik < 10) detik = '0' + detik;
-        
-        if (!isNaN(audio.duration)) {
-            durasiTeks.innerText = menit + ':' + detik;
+        if (!sedangGeser) {
+            const persen = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = persen + '%';
+            updateTeksWaktu(audio.currentTime);
         }
     });
 
@@ -213,12 +212,88 @@
         progressBar.style.width = '0%';
     });
 
-    function aturProgress(e) {
-        const totalLebar = e.currentTarget.clientWidth;
-        const posisiKlik = e.offsetX;
-        const durasiLagu = audio.duration;
-        audio.currentTime = (posisiKlik / totalLebar) * durasiLagu;
+    // Fungsi pembantu untuk format teks menit:detik
+    function updateTeksWaktu(waktu) {
+        let menit = Math.floor(waktu / 60);
+        let detik = Math.floor(waktu % 60);
+        if (detik < 10) detik = '0' + detik;
+        if (!isNaN(audio.duration)) {
+            durasiTeks.innerText = menit + ':' + detik;
+        }
     }
+
+    // --- LOGIKA MENGGESER PROGRESS BAR (DRAG & DROP) ---
+    function hitungPosisiGeser(e) {
+        const rect = progressContainer.getBoundingClientRect();
+        // Mendukung klik/geser lewat mouse laptop maupun layar sentuh HP
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        let posisiKlik = clientX - rect.left;
+        
+        // Batasi agar tidak keluar dari area garis player
+        if (posisiKlik < 0) posisiKlik = 0;
+        if (posisiKlik > rect.width) posisiKlik = rect.width;
+        
+        const persen = (posisiKlik / rect.width) * 100;
+        progressBar.style.width = persen + '%';
+        
+        if (!isNaN(audio.duration)) {
+            const waktuBaru = (posisiKlik / rect.width) * audio.duration;
+            updateTeksWaktu(waktuBaru);
+            return waktuBaru;
+        }
+        return 0;
+    }
+
+    // Saat klik atau sentuh pertama kali dimulai
+    progressContainer.addEventListener('mousedown', (e) => {
+        sedangGeser = true;
+        const waktuBaru = hitungPosisiGeser(e);
+        audio.currentTime = waktuBaru;
+    });
+
+    progressContainer.addEventListener('touchstart', (e) => {
+        sedangGeser = true;
+        hitungPosisiGeser(e);
+    });
+
+    // Saat kursor mouse atau jari digeser-geser
+    window.addEventListener('mousemove', (e) => {
+        if (sedangGeser) {
+            hitungPosisiGeser(e);
+        }
+    });
+
+    window.addEventListener('touchmove', (e) => {
+        if (sedangGeser) {
+            hitungPosisiGeser(e);
+        }
+    });
+
+    // Saat klik dilepas atau jari diangkat dari layar
+    window.addEventListener('mouseup', (e) => {
+        if (sedangGeser) {
+            const rect = progressContainer.getBoundingClientRect();
+            let posisiKlik = e.clientX - rect.left;
+            if (posisiKlik < 0) posisiKlik = 0;
+            if (posisiKlik > rect.width) posisiKlik = rect.width;
+            
+            if (!isNaN(audio.duration)) {
+                audio.currentTime = (posisiKlik / rect.width) * audio.duration;
+            }
+            sedangGeser = false;
+        }
+    });
+
+    window.addEventListener('touchend', (e) => {
+        if (sedangGeser) {
+            // Menggunakan durasi posisi terakhir saat jari diangkat
+            const persenSkarang = parseFloat(progressBar.style.width) / 100;
+            if (!isNaN(audio.duration) && !isNaN(persenSkarang)) {
+                audio.currentTime = persenSkarang * audio.duration;
+            }
+            sedangGeser = false;
+        }
+    });
 </script>
 
 </body>
