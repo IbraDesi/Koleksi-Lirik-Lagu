@@ -4,17 +4,16 @@
     <link rel="icon" type="image/png" href="../favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Cloves and The Tobacco - Biarkan Berlari</title>
+    <title>Lirik Lagu Biarkan Berlari - The Cloves and The Tobacco</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             background-color: #ffffff;
-            color: #212124;
+            color: #202124;
             margin: 0;
             padding: 20px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
         }
         @media (prefers-color-scheme: dark) {
             body {
@@ -25,35 +24,29 @@
         .container {
             max-width: 600px;
             width: 100%;
-            text-align: center;
         }
-        .header {
-            margin-bottom: 30px;
-        }
-        .judul {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .artis {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-        .kembali {
+        .back-link {
             display: inline-block;
             margin-bottom: 20px;
-            color: #007aff;
+            color: #1a73e8;
             text-decoration: none;
             font-size: 14px;
         }
-        .lirik-KONTEN {
-            line-height: 1.8;
-            font-size: 16px;
-            white-space: pre-line;
-            margin-bottom: 100px;
+        h1 {
+            font-size: 26px;
+            margin: 0 0 5px 0;
         }
-      /* ==========================================
+        .meta {
+            color: #70757a;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        .lyrics {
+            font-size: 16px;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+       /* ==========================================
            DESAIN AUDIO PLAYER BARU: SLIM & FLOATING
            ========================================== */
         .audio-player-slim {
@@ -122,83 +115,51 @@
             min-width: 30px;
             text-align: right;
         }
-
-        /* JALUR TRACK MUSIK (PROGRESS BAR) */
         .progress-container {
             flex-grow: 1;
-            height: 4px !important; /* Sangat tipis sesuai foto */
-            background: rgba(255, 255, 255, 0.3) !important;
-            border-radius: 2px !important;
-            position: relative;
+            background: #30363d;
+            height: 4px;
+            border-radius: 2px;
             cursor: pointer;
+            position: relative;
+            margin-right: 12px;
         }
-
-        /* WARNA JALUR YANG SUDAH BERJALAN */
         .progress-bar {
-            height: 100% !important;
-            background: #ffffff !important; /* Warna putih mengikuti jalurnya */
-            border-radius: 2px !important;
+            background: #58a6ff;
+            height: 100%;
             width: 0%;
-            position: absolute;
-            left: 0;
-            top: 0;
+            border-radius: 2px;
+            transition: width 0.1s linear;
         }
-
-        /* TEKS WAKTU (DURASI) */
-        .waktu {
-            color: #ffffff !important; /* Angka durasi warna putih */
-            font-size: 12px !important;
+        .durasi-teks {
+            color: #8b949e;
+            font-size: 11px;
             font-family: monospace;
             min-width: 30px;
             text-align: right;
-        }
-        .progress-container {
-            flex-grow: 1;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-            position: relative;
-            cursor: pointer;
-        }
-        .progress-bar {
-            height: 100%;
-            background: #007aff;
-            border-radius: 3px;
-            width: 0%;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        .waktu {
-            color: #ffffff;
-            font-size: 12px;
-            font-family: monospace;
-            min-width: 35px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header">
-        <a href="../index.html" class="kembali">⬅ Kembali ke Daftar Lagu</a>
-        <div class="judul">Biarkan Berlari</div>
-        <div class="artis">Dipopulerkan oleh: The Cloves and The Tobacco</div>
-    </div>
-
-    <!-- AUDIO ELEMENT (Arahkan ke folder tempat mp3 kamu berada, sesuaikan jalurnya jika berbeda) -->
-    <audio id="audioLagu" src="../biarkan-berlari.mp3"></audio>
-
-    <!-- CUSTOM PLAYER BAR -->
-    <div class="audio-player">
-        <button class="btn-play" id="tombolPlay" onclick="togglePlay()">▶</button>
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
+    <a href="../index.html" class="back-link">← Kembali ke Daftar Lagu</a>
+    
+    <h1>Biarkan Berlari</h1>
+    <div class="meta">Dipopulerkan oleh: The Cloves and The Tobacco</div>
+    <!-- PEMUTAR AUDIO KUSTOM MINI SLIM -->
+    <div class="audio-player-slim">
+        <audio id="audioLagu">
+            <source src="../biarkan-berlari.mp3" type="audio/mpeg">
+        </audio>
+        <button id="tombolPlay" class="btn-play" onclick="togglePlay()">▶</button>
+        <div class="progress-container" onclick="aturProgress(event)">
+            <div id="progressBar" class="progress-bar"></div>
         </div>
-        <div class="waktu" id="durasiTeks">0:00</div>
+        <span id="durasiTeks" class="durasi-teks">0:00</span>
     </div>
-
-    <div class="lirik-KONTEN">
+    
+    <div class="lyrics">
         Menatap dalam bening botol whiskey
         Yang kini isinya tinggal setengahnya
         Menenggelamkan dalam tegukan
@@ -234,8 +195,8 @@
         Kuasa rana ke-ilahian
         Yang selalu digunakan
         Instrumen penegasan entitas kebajikan
-        raplan kalimat bijak
-        yang sedang tak ingin aku dengar
+        Raplan kalimat bijak
+        Yang sedang tak ingin aku dengar
 
         Dan biarkan aku berlari
         Sejenak aku sembunyi
@@ -263,8 +224,7 @@
         Aku akui aku kalah
     </div>
 </div>
-
-<script>
+   <script>
     const audio = document.getElementById('audioLagu');
     const tombolPlay = document.getElementById('tombolPlay');
     const progressBar = document.getElementById('progressBar');
@@ -283,6 +243,7 @@
         }
     }
 
+    // Update Otomatis Garis Progress & Waktu Lagu saat berputar biasa
     audio.addEventListener('timeupdate', () => {
         if (!sedangGeser) {
             const persen = (audio.currentTime / audio.duration) * 100;
@@ -296,6 +257,7 @@
         progressBar.style.width = '0%';
     });
 
+    // Fungsi pembantu untuk format teks menit:detik
     function updateTeksWaktu(waktu) {
         let menit = Math.floor(waktu / 60);
         let detik = Math.floor(waktu % 60);
@@ -305,11 +267,14 @@
         }
     }
 
+    // --- LOGIKA MENGGESER PROGRESS BAR (DRAG & DROP) ---
     function hitungPosisiGeser(e) {
         const rect = progressContainer.getBoundingClientRect();
+        // Mendukung klik/geser lewat mouse laptop maupun layar sentuh HP
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         let posisiKlik = clientX - rect.left;
         
+        // Batasi agar tidak keluar dari area garis player
         if (posisiKlik < 0) posisiKlik = 0;
         if (posisiKlik > rect.width) posisiKlik = rect.width;
         
@@ -324,6 +289,7 @@
         return 0;
     }
 
+    // Saat klik atau sentuh pertama kali dimulai
     progressContainer.addEventListener('mousedown', (e) => {
         sedangGeser = true;
         const waktuBaru = hitungPosisiGeser(e);
@@ -335,6 +301,7 @@
         hitungPosisiGeser(e);
     });
 
+    // Saat kursor mouse atau jari digeser-geser
     window.addEventListener('mousemove', (e) => {
         if (sedangGeser) {
             hitungPosisiGeser(e);
@@ -347,6 +314,7 @@
         }
     });
 
+    // Saat klik dilepas atau jari diangkat dari layar
     window.addEventListener('mouseup', (e) => {
         if (sedangGeser) {
             const rect = progressContainer.getBoundingClientRect();
@@ -363,6 +331,7 @@
 
     window.addEventListener('touchend', (e) => {
         if (sedangGeser) {
+            // Menggunakan durasi posisi terakhir saat jari diangkat
             const persenSkarang = parseFloat(progressBar.style.width) / 100;
             if (!isNaN(audio.duration) && !isNaN(persenSkarang)) {
                 audio.currentTime = persenSkarang * audio.duration;
@@ -371,5 +340,6 @@
         }
     });
 </script>
+
 </body>
 </html>
