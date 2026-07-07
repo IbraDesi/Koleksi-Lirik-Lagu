@@ -45,6 +45,53 @@
             line-height: 1.6;
             white-space: pre-line;
         }
+        /* DESAIN AUDIO PLAYER SLIM KUSTOM */
+        .audio-player-slim {
+            display: flex;
+            align-items: center;
+            background: #161b22;
+            border: 1px solid #30363d;
+            padding: 8px 14px;
+            border-radius: 20px;
+            margin-top: 15px;
+            margin-bottom: 25px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .btn-play {
+            background: none;
+            border: none;
+            color: #58a6ff;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 0;
+            margin-right: 12px;
+            width: 20px;
+            outline: none;
+        }
+        .progress-container {
+            flex-grow: 1;
+            background: #30363d;
+            height: 4px;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+            margin-right: 12px;
+        }
+        .progress-bar {
+            background: #58a6ff;
+            height: 100%;
+            width: 0%;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+        .durasi-teks {
+            color: #8b949e;
+            font-size: 11px;
+            font-family: monospace;
+            min-width: 30px;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -54,6 +101,17 @@
     
     <h1>Terus Bersinar</h1>
     <div class="meta">Dipopulerkan oleh: Superiots Ft. Shania</div>
+    <!-- PEMUTAR AUDIO KUSTOM MINI SLIM -->
+    <div class="audio-player-slim">
+        <audio id="audioLagu">
+            <source src="../terus-bersinar.mp3" type="audio/mpeg">
+        </audio>
+        <button id="tombolPlay" class="btn-play" onclick="togglePlay()">▶</button>
+        <div class="progress-container" onclick="aturProgress(event)">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <span id="durasiTeks" class="durasi-teks">0:00</span>
+    </div>
     
     <div class="lyrics">
         Tentang sawah dan laut
@@ -107,6 +165,47 @@
         Walau terjatuh dan kau bangun lagi
     </div>
 </div>
+    <script>
+    const audio = document.getElementById('audioLagu');
+    const tombolPlay = document.getElementById('tombolPlay');
+    const progressBar = document.getElementById('progressBar');
+    const durasiTeks = document.getElementById('durasiTeks');
+
+    function togglePlay() {
+        if (audio.paused) {
+            audio.play();
+            tombolPlay.innerText = '❚❚';
+        } else {
+            audio.pause();
+            tombolPlay.innerText = '▶';
+        }
+    }
+
+    audio.addEventListener('timeupdate', () => {
+        const persen = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = persen + '%';
+        
+        let menit = Math.floor(audio.currentTime / 60);
+        let detik = Math.floor(audio.currentTime % 60);
+        if (detik < 10) detik = '0' + detik;
+        
+        if (!isNaN(audio.duration)) {
+            durasiTeks.innerText = menit + ':' + detik;
+        }
+    });
+
+    audio.addEventListener('ended', () => {
+        tombolPlay.innerText = '▶';
+        progressBar.style.width = '0%';
+    });
+
+    function aturProgress(e) {
+        const totalLebar = e.currentTarget.clientWidth;
+        const posisiKlik = e.offsetX;
+        const durasiLagu = audio.duration;
+        audio.currentTime = (posisiKlik / totalLebar) * durasiLagu;
+    }
+</script>
 
 </body>
 </html>
