@@ -53,8 +53,7 @@
             white-space: pre-line;
             margin-bottom: 100px;
         }
-        
-       /* ==========================================
+      /* ==========================================
            DESAIN AUDIO PLAYER BARU: SLIM & FLOATING
            ========================================== */
         .audio-player-slim {
@@ -92,6 +91,36 @@
             height: 24px !important;
             outline: none !important;
             box-shadow: none !important;
+        }
+
+        /* JALUR TRACK MUSIK (PROGRESS BAR) */
+        .progress-container {
+            flex-grow: 1;
+            height: 4px !important; /* Sangat tipis sesuai foto */
+            background: rgba(255, 255, 255, 0.3) !important;
+            border-radius: 2px !important;
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* WARNA JALUR YANG SUDAH BERJALAN */
+        .progress-bar {
+            height: 100% !important;
+            background: #ffffff !important; /* Warna putih mengikuti jalurnya */
+            border-radius: 2px !important;
+            width: 0%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* TEKS WAKTU (DURASI) */
+        .waktu {
+            color: #ffffff !important; /* Angka durasi warna putih */
+            font-size: 12px !important;
+            font-family: monospace;
+            min-width: 30px;
+            text-align: right;
         }
 
         /* JALUR TRACK MUSIK (PROGRESS BAR) */
