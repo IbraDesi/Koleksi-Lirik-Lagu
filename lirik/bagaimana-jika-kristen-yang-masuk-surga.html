@@ -46,18 +46,25 @@
             line-height: 1.6;
             white-space: pre-line;
         }
-        /* DESAIN AUDIO PLAYER SLIM KUSTOM */
-        .audio-player-slim {
-            display: flex;
-            align-items: center;
-            background: #161b22;
-            border: 1px solid #30363d;
-            padding: 8px 14px;
-            border-radius: 20px;
-            margin-top: 15px;
-            margin-bottom: 25px;
-            width: 100%;
-            box-sizing: border-box;
+       /* * DESAIN AUDIO PLAYER SLIM KUSTOM MENGAMBANG * */
+.audio-player-slim {
+    position: fixed;
+    bottom: 15px; /* Jarak mengambang dari bawah layar HP */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%; /* Lebih ramping */
+    max-width: 450px;
+    background: rgba(30, 30, 30, 0.9); /* Gelap estetik transparan */
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    padding: 6px 15px; /* Padding tipis */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    box-sizing: border-box;
+}
         }
         .btn-play {
             background: none;
