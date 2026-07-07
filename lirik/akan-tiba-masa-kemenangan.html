@@ -171,12 +171,13 @@
             <source src="../akan-tiba-masa-kemenangan.mp3" type="audio/mpeg">
         </audio>
         <!-- Tombol Ulangi Lagu (Loop) -->
+        <!-- Tombol Ulangi Lagu (Loop) -->
         <button id="btn-loop" class="btn-control" onclick="toggleLoop()" style="opacity: 0.4;">↻</button>
 
         <!-- Tombol Lagu Sebelumnya (Previous) -->
         <button class="btn-control" onclick="laguSebelumnya()">|◀</button>
 
-        <!-- Ini tombol Play bawaanmu yang lama -->
+        <!-- Tombol Play (Pastikan bersih tanpa tanda bintang) -->
         <button id="tombolPlay" class="btn-play" onclick="togglePlay()">▶</button>
 
         <!-- Tombol Lagu Selanjutnya (Next) -->
@@ -185,6 +186,8 @@
         <div class="progress-container" onclick="aturProgress(event)">
             <div id="progressBar" class="progress-bar"></div>
         </div>
+        <span id="durasiTeks" class="durasi-teks">0:00</span>
+</div>
         <span id="durasiTeks" class="durasi-teks">0:00</span>
     </div>
     
