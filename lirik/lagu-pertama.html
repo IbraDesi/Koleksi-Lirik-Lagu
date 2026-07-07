@@ -3,131 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lirik Lagu Terbawa Bawa Dunia - S.K.O.K</title>
-    
+    <title>Terbawa Bawa Dunia - S.K.O.K</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background-color: #ffffff;
-            color: #202124;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
             margin: 0;
             padding: 20px;
             display: flex;
             justify-content: center;
         }
-        @media (prefers-color-scheme: dark) {
-    body {
-        background-color: #121212;
-        color: #e8eaed;
-    }
-}
         .container {
             max-width: 600px;
             width: 100%;
+            padding-bottom: 60px;
         }
-        .back-link {
+        .kembali {
             display: inline-block;
-            margin-bottom: 20px;
-            color: #1a0dab;
+            color: #58a6ff;
             text-decoration: none;
+            margin-bottom: 20px;
             font-size: 14px;
         }
         h1 {
-            font-size: 26px;
-            margin: 0 0 5px 0;
+            color: #f0f6fc;
+            margin-bottom: 5px;
+            font-size: 28px;
         }
-        .meta {
-            color: #70757a;
-            font-size: 15px;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #eeeeee;
-            padding-bottom: 15px;
+        .musisi {
+            color: #8b949e;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 16px;
         }
-        .lirik-box {
-            font-size: 17px;
-            line-height: 1.7;
+        .lirik-teks {
             white-space: pre-line;
-            letter-spacing: 0.3px;
+            line-height: 1.8;
+            font-size: 16px;
+            word-wrap: break-word;
+        }
+        
+        /* DESAIN AUDIO PLAYER SLIM KUSTOM */
+        .audio-player-slim {
+            display: flex;
+            align-items: center;
+            background: #161b22;
+            border: 1px solid #30363d;
+            padding: 8px 14px;
+            border-radius: 20px;
+            margin-top: 15px;
+            margin-bottom: 25px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .btn-play {
+            background: none;
+            border: none;
+            color: #58a6ff;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 0;
+            margin-right: 12px;
+            width: 20px;
+            outline: none;
+        }
+        .progress-container {
+            flex-grow: 1;
+            background: #30363d;
+            height: 4px;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+            margin-right: 12px;
+        }
+        .progress-bar {
+            background: #58a6ff;
+            height: 100%;
+            width: 0%;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+        .durasi-teks {
+            color: #8b949e;
+            font-size: 11px;
+            font-family: monospace;
+            min-width: 30px;
+            text-align: right;
         }
     </style>
-
-    <!-- KODE SCHEMA MARKUP (Kunci Utama agar Masuk Pencarian Instan Google) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "MusicComposition",
-      "name": "Terbawa Bawa Dunia",
-      "byArtist": {
-        "@type": "MusicGroup",
-        "name": "S.K.O.K"
-      },
-      "lyrics": {
-        "@type": "Lyrics",
-        "text": "Ini jaman sukseknya kehancuran\nPergaulan generasi terkini\nBanyak prawan hilang kesucian\nBiadapnya moral di negri ku ini\n\nPerjuangan sang ibunda Kartini\nKini tak lagi mereka hargai\nBagaimana harapan orang tua\nJika kini anaknya sudah semakin menggila\n\nTerbawa-bawa dunia\nJaman semakin menggila\nHidupnya Keluyuran\nPelacuran tak terarah\n\nHanya ingin di kata\nTren ke sexy'annya\nBerani Obralkan diri\nTak peduli harga diri akan mati\n\nPerjuangan sang ibunda kartini\nKini tak lagi mereka hargai\nBagaimana harapan orang tua\nJika kini anaknya sudah semakin menggila\n\nTerbawa-bawa dunia\nJaman semakin menggila\nHidupnya keluyuran\nPelacuran tak terarah\n\nHanya ingin dikata\nTren ke sex'annya\nBerani obralkan diri\nTak peduli harga dirinya kan mati\n\nTerbawa-bawa dunia\nJaman semakin menggila\nHidupnya keluyuran\nPelacuran tak terarah\n\nHanya ingin dikata\nTren ke sex'annya\nBerani obralkan diri\nTak peduli harga dirinya kan mati"
-      }
-    }
-    </script>
 </head>
 <body>
 
-    <div class="container">
-        <a href="../index.html" class="back-link">&larr; Kembali ke Daftar Lagu</a>
-        
-        <h1>Terbawa Bawa Dunia</h1>
-        <div class="meta">Dipopulerkan oleh: <strong>S.K.O.K</strong></div>
-        <audio controls style="width: 100%; max-width: 100%; margin-top: 15px; margin-bottom: 25px; outline: none;">
-    <source src="../terbawa-bawa-dunia.mp3" type="audio/mpeg">
-    Browser kamu tidak mendukung pemutar audio ini.
-</audio>
-        
-        <div class="lirik-box">
-Ini jaman sukseknya kehancuran
-Pergaulan generasi terkini
-Banyak prawan hilang kesucian 
-Biadapnya moral di negri ku ini
+<div class="container">
+    <a href="../index.html" class="kembali">← Kembali ke Daftar Lagu</a>
+    
+    <h1>Terbawa Bawa Dunia</h1>
+    <p class="musisi">Dipopulerkan oleh: S.K.O.K</p>
 
-
-Perjuangan sang ibunda Kartini 
-Kini tak lagi mereka hargai
-Bagaimana harapan orang tua 
-Jika kini anaknya sudah semakin menggila 
-
-Terbawa-bawa dunia
-Jaman semakin menggila
-Hidupnya Keluyuran
-Pelacuran tak terarah
-
-Hanya ingin di kata
-Tren ke sexy'annya
-Berani Obralkan diri
-Tak peduli harga diri akan mati 
-
-Perjuangan sang ibunda kartini
-Kini tak lagi mereka hargai
-Bagaimana harapan orang tua
-Jika kini anaknya sudah semakin menggila
-
-Terbawa-bawa dunia
-Jaman semakin menggila
-Hidupnya keluyuran
-Pelacuran tak terarah
-
-Hanya ingin dikata
-Tren ke sexy'annya
-Berani obralkan diri
-Tak peduli harga dirinya kan mati
-
-Terbawa-bawa dunia
-Jaman semakin menggila
-Hidupnya keluyuran
-Pelacuran tak terarah
-
-Hanya ingin dikata
-Tren ke sexy'annya
-Berani obralkan diri
-Tak peduli harga dirinya kan mati
+    <!-- PEMUTAR AUDIO KUSTOM MINI SLIM -->
+    <div class="audio-player-slim">
+        <audio id="audioLagu">
+            <source src="../terbawa-bawa-dunia.mp3" type="audio/mpeg">
+        </audio>
+        <button id="tombolPlay" class="btn-play" onclick="togglePlay()">▶</button>
+        <div class="progress-container" onclick="aturProgress(event)">
+            <div id="progressBar" class="progress-bar"></div>
         </div>
+        <span id="durasiTeks" class="durasi-teks">0:00</span>
     </div>
+
+    <!-- BAGIAN LIRIK LAGU -->
+    <div class="lirik-teks">
+        Ini jaman sukseknya kehancuran
+        Pergaulan generasi terkini
+        Banyak prawan hilang kesucian
+        Biadapnya moral di negri ku ini
+
+        Perjuangan sang ibunda Kartini
+        Kini tak lagi mereka hargai
+        Bagaimana harapan orang tua
+        Jika kini anaknya sudah semakin menggila
+
+        Terbawa-bawa dunia
+        Jaman semakin menggila
+        Hidupnya Keluyuran
+        Pelacuran tak terarah
+
+        Hanya ingin di kata
+        Tren ke sexy'annya
+        Berani Obralkan diri
+        Tak peduli harga diri akan mati
+
+        Perjuangan sang ibunda kartini
+        Kini tak lagi mereka hargai
+        Bagaimana harapan orang tua
+        Jika kini anaknya sudah semakin menggila
+
+        Terbawa-bawa dunia
+        Jaman semakin menggila
+        Hidupnya Keluyuran
+        Pelacuran tak terarah
+
+        Hanya ingin di kata
+        Tren ke sexy'annya
+        Berani Obralkan diri
+        Tak peduli harga diri akan mati
+
+        Terbawa-bawa dunia
+        Jaman semakin menggila
+        Hidupnya Keluyuran
+        Pelacuran tak terarah
+
+        Hanya ingin di kata
+        Tren ke sexy'annya
+        Berani Obralkan diri
+        Tak peduli harga diri akan mati
+    </div>
+</div>
+
+<script>
+    const audio = document.getElementById('audioLagu');
+    const tombolPlay = document.getElementById('tombolPlay');
+    const progressBar = document.getElementById('progressBar');
+    const durasiTeks = document.getElementById('durasiTeks');
+
+    function togglePlay() {
+        if (audio.paused) {
+            audio.play();
+            tombolPlay.innerText = '❚❚';
+        } else {
+            audio.pause();
+            tombolPlay.innerText = '▶';
+        }
+    }
+
+    audio.addEventListener('timeupdate', () => {
+        const persen = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = persen + '%';
+        
+        let menit = Math.floor(audio.currentTime / 60);
+        let detik = Math.floor(audio.currentTime % 60);
+        if (detik < 10) detik = '0' + detik;
+        
+        if (!isNaN(audio.duration)) {
+            durasiTeks.innerText = menit + ':' + detik;
+        }
+    });
+
+    audio.addEventListener('ended', () => {
+        tombolPlay.innerText = '▶';
+        progressBar.style.width = '0%';
+    });
+
+    function aturProgress(e) {
+        const totalLebar = e.currentTarget.clientWidth;
+        const posisiKlik = e.offsetX;
+        const durasiLagu = audio.duration;
+        audio.currentTime = (posisiKlik / totalLebar) * durasiLagu;
+    }
+</script>
 
 </body>
 </html>
