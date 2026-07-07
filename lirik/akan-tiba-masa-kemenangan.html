@@ -85,24 +85,6 @@
             outline: none !important;
             box-shadow: none !important;
         }
-        .btn-control {
-    background: transparent !important;
-    border: none !important;
-    color: #ffffff !important;
-    font-size: 16px !important;
-    cursor: pointer;
-    padding: 0 !important;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 24px !important;
-    height: 24px !important;
-}
-.btn-control:hover {
-    opacity: 1;
-}
 
         /* JALUR TRACK MUSIK (PROGRESS BAR) */
         .progress-container {
@@ -170,24 +152,10 @@
         <audio id="audioLagu">
             <source src="../akan-tiba-masa-kemenangan.mp3" type="audio/mpeg">
         </audio>
-        <!-- Tombol Ulangi Lagu (Loop) -->
-        <!-- Tombol Ulangi Lagu (Loop) -->
-        <button id="btn-loop" class="btn-control" onclick="toggleLoop()" style="opacity: 0.4;">↻</button>
-
-        <!-- Tombol Lagu Sebelumnya (Previous) -->
-        <button class="btn-control" onclick="laguSebelumnya()">|◀</button>
-
-        <!-- Tombol Play (Pastikan bersih tanpa tanda bintang) -->
         <button id="tombolPlay" class="btn-play" onclick="togglePlay()">▶</button>
-
-        <!-- Tombol Lagu Selanjutnya (Next) -->
-        <button class="btn-control" onclick="laguSelanjutnya()">▶|</button>
-
         <div class="progress-container" onclick="aturProgress(event)">
             <div id="progressBar" class="progress-bar"></div>
         </div>
-        <span id="durasiTeks" class="durasi-teks">0:00</span>
-</div>
         <span id="durasiTeks" class="durasi-teks">0:00</span>
     </div>
     
@@ -226,7 +194,7 @@
         Tenaga dan pikiran takkan terbuang percuma
         Akan tiba masa kemenanganmu
         Tiap tetes keringat jadi arti di hidupmu
-  
+
         
     </div>
 </div>
@@ -238,14 +206,7 @@
     const durasiTeks = document.getElementById('durasiTeks');
 
     let sedangGeser = false;
-    function laguSelanjutnya() {
-    // Karena "Akan Tiba Masa Kemenangan" ada di paling bawah, mau diarahkan balik ke lagu paling atas?
-    window.location.href = 'terbawa-bawa-dunia.html'; 
-}
 
-function laguSebelumnya() {
-    // Diarahkan ke lagu tepat di atasnya
-    window.location.href = 'biarkan-berlari.html';
     function togglePlay() {
         if (audio.paused) {
             audio.play();
