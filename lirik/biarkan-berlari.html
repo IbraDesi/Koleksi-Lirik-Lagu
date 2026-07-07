@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cloves and The Tobacco - Biarkan Berlari</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #212124;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #e8eaed;
+            }
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+        .judul {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .artis {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .kembali {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #007aff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .lirik-KONTEN {
+            line-height: 1.8;
+            font-size: 16px;
+            white-space: pre-line;
+            margin-bottom: 100px;
+        }
+        
+        /* PLAYER BAR STYLE */
+        .audio-player {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 500px;
+            background: rgba(30, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        .btn-play {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 18px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .progress-container {
+            flex-grow: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #007aff;
+            border-radius: 3px;
+            width: 0%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .waktu {
+            color: #ffffff;
+            font-size: 12px;
+            font-family: monospace;
+            min-width: 35px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <a href="../index.html" class="kembali">⬅ Kembali ke Daftar Lagu</a>
+        <div class="judul">Biarkan Berlari</div>
+        <div class="artis">Dipopulerkan oleh: The Cloves and The Tobacco</div>
+    </div>
+
+    <!-- AUDIO ELEMENT (Arahkan ke folder tempat mp3 kamu berada, sesuaikan jalurnya jika berbeda) -->
+    <audio id="audioLagu" src="../biarkan-berlari.mp3"></audio>
+
+    <!-- CUSTOM PLAYER BAR -->
+    <div class="audio-player">
+        <button class="btn-play" id="tombolPlay" onclick="togglePlay()">▶</button>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="waktu" id="durasiTeks">0:00</div>
+    </div>
+
+    <div class="lirik-KONTEN">
+        Menatap dalam bening botol whiskey
+        Yang kini isinya tinggal setengahnya
+        Menenggelamkan dalam tegukan
+        Menyibak riak-riak kekalahan
+        Yang kini deras menerjang
+        Pemakzulan kemenangan
+        Meluluh lantahkan barisan harapan
+
+        Caci maki dan cerca yang mendera
+        Menyudutkan dan mentertawakan
+        Keras lugas mengumpat kan nista
+        Merajam dengan ujung-ujung tajam
+        meninggalkan luka dalam
+        sayat-sayat serpihanya
+        memecah perihkan jiwa
+
+        Dan biarkan aku berlari
+        Sejenak aku sembunyi
+        Tuk mengatur ulang nafasku
+        Selaraskan lagi langkah ku
+
+        Dan persetan dengan semua
+        Tunggu saja aku kan kembali
+        Cukuplah kiranya hari ini
+        Aku akui aku kalah
+        Aku kalahhh hooo
+        Ku kan kembali
+
+        Sebagian mereka datang
+        Tuk sekedar memberikan
+        Ocehan serat makna penghakiman
+        lupa dan terlena berperan menggenggam
+        Kuasa rana ke-ilahian
+        Yang selalu digunakan
+        Instrumen penegasan entitas kebajikan
+        raplan kalimat bijak
+        yang sedang tak ingin aku dengar
+
+        Dan biarkan aku berlari
+        Sejenak aku sembunyi
+        Tuk mengatur ulang nafasku
+        Selaraskan lagi langkah ku
+
+        Dan persetan dengan semua
+        Tunggu saja aku kan kembali
+        Cukuplah kiranya hari ini
+        Aku akui aku kalah
+
+        Usaha kau khawatirkan
+        Brikanku sejenak ruang 
+        Waktu yang kan menyembuhkan
+        Dan ku kan kembali berperang
+
+        Dan biarkan aku berlari
+        Sejenak aku sembunyi
+        Tuk mengatur ulang nafasku
+        Selaraskan lagi langkah ku
+
+        Dan persetan dengan semua
+        Tunggu saja aku kan kembali
+        Cukuplah kiranya hari ini
+        Aku akui aku kalah
+    </div>
+</div>
+
+<script>
+    const audio = document.getElementById('audioLagu');
+    const tombolPlay = document.getElementById('tombolPlay');
+    const progressBar = document.getElementById('progressBar');
+    const progressContainer = document.querySelector('.progress-container');
+    const durasiTeks = document.getElementById('durasiTeks');
+
+    let sedangGeser = false;
+
+    function togglePlay() {
+        if (audio.paused) {
+            audio.play();
+            tombolPlay.innerText = '❚❚';
+        } else {
+            audio.pause();
+            tombolPlay.innerText = '▶';
+        }
+    }
+
+    audio.addEventListener('timeupdate', () => {
+        if (!sedangGeser) {
+            const persen = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = persen + '%';
+            updateTeksWaktu(audio.currentTime);
+        }
+    });
+
+    audio.addEventListener('ended', () => {
+        tombolPlay.innerText = '▶';
+        progressBar.style.width = '0%';
+    });
+
+    function updateTeksWaktu(waktu) {
+        let menit = Math.floor(waktu / 60);
+        let detik = Math.floor(waktu % 60);
+        if (detik < 10) detik = '0' + detik;
+        if (!isNaN(audio.duration)) {
+            durasiTeks.innerText = menit + ':' + detik;
+        }
+    }
+
+    function hitungPosisiGeser(e) {
+        const rect = progressContainer.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        let posisiKlik = clientX - rect.left;
+        
+        if (posisiKlik < 0) posisiKlik = 0;
+        if (posisiKlik > rect.width) posisiKlik = rect.width;
+        
+        const persen = (posisiKlik / rect.width) * 100;
+        progressBar.style.width = persen + '%';
+        
+        if (!isNaN(audio.duration)) {
+            const waktuBaru = (posisiKlik / rect.width) * audio.duration;
+            updateTeksWaktu(waktuBaru);
+            return waktuBaru;
+        }
+        return 0;
+    }
+
+    progressContainer.addEventListener('mousedown', (e) => {
+        sedangGeser = true;
+        const waktuBaru = hitungPosisiGeser(e);
+        audio.currentTime = waktuBaru;
+    });
+
+    progressContainer.addEventListener('touchstart', (e) => {
+        sedangGeser = true;
+        hitungPosisiGeser(e);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (sedangGeser) {
+            hitungPosisiGeser(e);
+        }
+    });
+
+    window.addEventListener('touchmove', (e) => {
+        if (sedangGeser) {
+            hitungPosisiGeser(e);
+        }
+    });
+
+    window.addEventListener('mouseup', (e) => {
+        if (sedangGeser) {
+            const rect = progressContainer.getBoundingClientRect();
+            let posisiKlik = e.clientX - rect.left;
+            if (posisiKlik < 0) posisiKlik = 0;
+            if (posisiKlik > rect.width) posisiKlik = rect.width;
+            
+            if (!isNaN(audio.duration)) {
+                audio.currentTime = (posisiKlik / rect.width) * audio.duration;
+            }
+            sedangGeser = false;
+        }
+    });
+
+    window.addEventListener('touchend', (e) => {
+        if (sedangGeser) {
+            const persenSkarang = parseFloat(progressBar.style.width) / 100;
+            if (!isNaN(audio.duration) && !isNaN(persenSkarang)) {
+                audio.currentTime = persenSkarang * audio.duration;
+            }
+            sedangGeser = false;
+        }
+    });
+</script>
+</body>
+</html>
