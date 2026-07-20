@@ -11,7 +11,7 @@
             background-color: #ffffff;
             color: #202124;
             margin: 0;
-            padding: 20px;
+            padding: 20px 20px 80px 20px; /* Ditambah padding bawah agar lirik tidak tertutup player */
             display: flex;
             justify-content: center;
         }
@@ -46,7 +46,8 @@
             line-height: 1.6;
             white-space: pre-line;
         }
-       /* ==========================================
+
+        /* ==========================================
            DESAIN AUDIO PLAYER BARU: SLIM & FLOATING
            ========================================== */
         .audio-player-slim {
@@ -54,52 +55,73 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 85%;
-            max-width: 450px;
-            background: rgba(255, 255, 255, 0.2) !important; /* Warna bar agak terang transparan sesuai foto */
+            width: 90%;
+            max-width: 480px;
+            background: rgba(30, 30, 30, 0.6) !important;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border-radius: 30px !important; /* Sudut membulat penuh kapsul */
-            padding: 8px 20px !important; /* Tipis ramping */
+            border-radius: 30px !important;
+            padding: 8px 18px !important;
             display: flex !important;
             align-items: center !important;
-            gap: 15px !important;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            gap: 10px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             z-index: 9999 !important;
             box-sizing: border-box !important;
         }
 
-        /* TOMBOL PLAY (SEGITIGA PUTIH TANPA KOTAK) */
-        .btn-play {
-            background: transparent !important; /* Hapus kotak putih total */
+        /* GROUP TOMBOL KONTROL */
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* TOMBOL KONTROL UTAMA */
+        .btn-control {
+            background: transparent !important;
             border: none !important;
-            color: #ffffff !important; /* Segitiga warna putih bersih */
-            font-size: 16px !important;
+            color: #ffffff !important;
+            font-size: 14px;
             cursor: pointer;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             padding: 0 !important;
-            width: 24px !important;
-            height: 24px !important;
+            width: 24px;
+            height: 24px;
             outline: none !important;
-            box-shadow: none !important;
+            opacity: 0.8;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        .btn-control:hover {
+            opacity: 1;
+        }
+
+        .btn-control:active {
+            transform: scale(0.9);
+        }
+
+        /* STATU UNTUK TOMBOL REPEAT */
+        .btn-control.active {
+            opacity: 1;
+            color: #1a73e8 !important; /* Warna aksen biru saat aktif */
         }
 
         /* JALUR TRACK MUSIK (PROGRESS BAR) */
         .progress-container {
             flex-grow: 1;
-            height: 4px !important; /* Sangat tipis sesuai foto */
+            height: 4px !important;
             background: rgba(255, 255, 255, 0.3) !important;
             border-radius: 2px !important;
             position: relative;
             cursor: pointer;
         }
 
-        /* WARNA JALUR YANG SUDAH BERJALAN */
         .progress-bar {
             height: 100% !important;
-            background: #ffffff !important; /* Warna putih mengikuti jalurnya */
+            background: #ffffff !important;
             border-radius: 2px !important;
             width: 0%;
             position: absolute;
@@ -107,35 +129,11 @@
             top: 0;
         }
 
-        /* TEKS WAKTU (DURASI) */
-        .waktu {
-            color: #ffffff !important; /* Angka durasi warna putih */
-            font-size: 12px !important;
-            font-family: monospace;
-            min-width: 30px;
-            text-align: right;
-        }
-        .progress-container {
-            flex-grow: 1;
-            background: #30363d;
-            height: 4px;
-            border-radius: 2px;
-            cursor: pointer;
-            position: relative;
-            margin-right: 12px;
-        }
-        .progress-bar {
-            background: #58a6ff;
-            height: 100%;
-            width: 0%;
-            border-radius: 2px;
-            transition: width 0.1s linear;
-        }
         .durasi-teks {
-            color: #8b949e;
-            font-size: 11px;
+            color: #ffffff !important;
+            font-size: 11px !important;
             font-family: monospace;
-            min-width: 30px;
+            min-width: 32px;
             text-align: right;
         }
     </style>
@@ -147,12 +145,24 @@
     
     <h1>Akan Tiba Masa Kemenangan</h1>
     <div class="meta">Dipopulerkan oleh: Superiots</div>
+    
     <!-- PEMUTAR AUDIO KUSTOM MINI SLIM -->
     <div class="audio-player-slim">
         <audio id="audioLagu">
             <source src="../akan-tiba-masa-kemenangan.mp3" type="audio/mpeg">
         </audio>
-        <button id="tombolPlay" class="btn-play" onclick="togglePlay()">▶</button>
+        
+        <div class="controls">
+            <!-- Tombol Previous -->
+            <button id="tombolPrev" class="btn-control" onclick="prevLagu()" title="Lagu Sebelumnya">⏮</button>
+            <!-- Tombol Play/Pause -->
+            <button id="tombolPlay" class="btn-control" onclick="togglePlay()" title="Putar/Jeda">▶</button>
+            <!-- Tombol Next -->
+            <button id="tombolNext" class="btn-control" onclick="nextLagu()" title="Lagu Selanjutnya">⏭</button>
+            <!-- Tombol Repeat (Ulangi) -->
+            <button id="tombolRepeat" class="btn-control" onclick="toggleRepeat()" title="Ulangi Lagu">🔁</button>
+        </div>
+
         <div class="progress-container" onclick="aturProgress(event)">
             <div id="progressBar" class="progress-bar"></div>
         </div>
@@ -198,18 +208,23 @@
         takkan terbuang percuma
         Akan tiba masa kemenanganmu
         Tiap tetes keringat jadi arti di hidupmu
-
-        
     </div>
 </div>
-   <script>
+
+<script>
     const audio = document.getElementById('audioLagu');
     const tombolPlay = document.getElementById('tombolPlay');
+    const tombolRepeat = document.getElementById('tombolRepeat');
     const progressBar = document.getElementById('progressBar');
     const progressContainer = document.querySelector('.progress-container');
     const durasiTeks = document.getElementById('durasiTeks');
 
     let sedangGeser = false;
+    let isRepeat = false; // Mode ulangi lagu
+
+    // --- ATUR LINK LAGU SEBELUMNYA & SELANJUTNYA DI SINI ---
+    const urlLaguSebelumnya = "lagu-sebelumnya.html"; // Ubah dengan link halaman HTML lagu sebelumnya
+    const urlLaguSelanjutnya = "lagu-selanjutnya.html"; // Ubah dengan link halaman HTML lagu selanjutnya
 
     function togglePlay() {
         if (audio.paused) {
@@ -221,7 +236,30 @@
         }
     }
 
-    // Update Otomatis Garis Progress & Waktu Lagu saat berputar biasa
+    // Fungsi Ulangi Lagu (Repeat)
+    function toggleRepeat() {
+        isRepeat = !isRepeat;
+        audio.loop = isRepeat; // Aktifkan/matikan fitur loop bawaan HTML5 audio
+        
+        if (isRepeat) {
+            tombolRepeat.classList.add('active');
+            tombolRepeat.style.color = '#58a6ff'; // Indikator aktif
+        } else {
+            tombolRepeat.classList.remove('active');
+            tombolRepeat.style.color = '#ffffff';
+        }
+    }
+
+    // Navigasi Lagu
+    function prevLagu() {
+        window.location.href = urlLaguSebelumnya;
+    }
+
+    function nextLagu() {
+        window.location.href = urlLaguSelanjutnya;
+    }
+
+    // Update Otomatis Garis Progress & Waktu Lagu saat berputar
     audio.addEventListener('timeupdate', () => {
         if (!sedangGeser) {
             const persen = (audio.currentTime / audio.duration) * 100;
@@ -230,12 +268,15 @@
         }
     });
 
+    // Ketika Lagu Selesai
     audio.addEventListener('ended', () => {
-        tombolPlay.innerText = '▶';
-        progressBar.style.width = '0%';
+        if (!isRepeat) {
+            // Jika mode repeat TIDAK aktif, otomatis pindah ke lagu selanjutnya
+            nextLagu();
+        }
     });
 
-    // Fungsi pembantu untuk format teks menit:detik
+    // Fungsi pembantu format waktu menit:detik
     function updateTeksWaktu(waktu) {
         let menit = Math.floor(waktu / 60);
         let detik = Math.floor(waktu % 60);
@@ -248,11 +289,9 @@
     // --- LOGIKA MENGGESER PROGRESS BAR (DRAG & DROP) ---
     function hitungPosisiGeser(e) {
         const rect = progressContainer.getBoundingClientRect();
-        // Mendukung klik/geser lewat mouse laptop maupun layar sentuh HP
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         let posisiKlik = clientX - rect.left;
         
-        // Batasi agar tidak keluar dari area garis player
         if (posisiKlik < 0) posisiKlik = 0;
         if (posisiKlik > rect.width) posisiKlik = rect.width;
         
@@ -267,7 +306,6 @@
         return 0;
     }
 
-    // Saat klik atau sentuh pertama kali dimulai
     progressContainer.addEventListener('mousedown', (e) => {
         sedangGeser = true;
         const waktuBaru = hitungPosisiGeser(e);
@@ -279,20 +317,14 @@
         hitungPosisiGeser(e);
     });
 
-    // Saat kursor mouse atau jari digeser-geser
     window.addEventListener('mousemove', (e) => {
-        if (sedangGeser) {
-            hitungPosisiGeser(e);
-        }
+        if (sedangGeser) hitungPosisiGeser(e);
     });
 
     window.addEventListener('touchmove', (e) => {
-        if (sedangGeser) {
-            hitungPosisiGeser(e);
-        }
+        if (sedangGeser) hitungPosisiGeser(e);
     });
 
-    // Saat klik dilepas atau jari diangkat dari layar
     window.addEventListener('mouseup', (e) => {
         if (sedangGeser) {
             const rect = progressContainer.getBoundingClientRect();
@@ -309,7 +341,6 @@
 
     window.addEventListener('touchend', (e) => {
         if (sedangGeser) {
-            // Menggunakan durasi posisi terakhir saat jari diangkat
             const persenSkarang = parseFloat(progressBar.style.width) / 100;
             if (!isNaN(audio.duration) && !isNaN(persenSkarang)) {
                 audio.currentTime = persenSkarang * audio.duration;
